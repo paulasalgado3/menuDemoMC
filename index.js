@@ -34,6 +34,10 @@ app.get(/^(.+)$/, function(req, res){
         case '/voice':
             res.send("selecciono VOICE");
             break;
+	case '/menu':
+		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data);};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='opc1.png' alt='Opcion 1' width='80%'>	</body></html>";
+		res.send(body);
+		break;
     default: res.sendFile( __dirname + req.params[0]); 
     }
  });
