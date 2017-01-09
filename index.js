@@ -18,7 +18,7 @@ var wss = new WebSocketServer({server: httpsServer});
 
 wss.on('connection', function(wss) {
 	wss.send('conectado');
-    ws.on('message', function(message) {
+    wss.on('message', function(message) {
         wss.broadcast(message);
     });
 });
@@ -35,7 +35,7 @@ app.get(/^(.+)$/, function(req, res){
             res.send("selecciono VOICE");
             break;
 	case '/menu':
-		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data);};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='opc1.png' alt='Opcion 1' width='80%'>	</body></html>";
+		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data);};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='img/opc1.png' alt='Opcion 1' width='80%'>	</body></html>";
 		res.send(body);
 		break;
     default: res.sendFile( __dirname + req.params[0]); 
