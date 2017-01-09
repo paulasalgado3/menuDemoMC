@@ -37,7 +37,7 @@ app.get(/^(.+)$/, function(req, res){
 	    enviarMensaje("opc1");
             break;
 	case '/menu':
-		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data); switch (e.data) {case 'opc1': window.location = 'https://speech-"+DOMINIO+"/imagen'; break; default: }};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='img/opc1.png' alt='Opcion 1' width='80%'> <img src='img/opc2.png' alt='Opcion 2' width='80%'> <img src='img/opc3.png' alt='Opcion 3' width='80%'>	<img src='img/opc4.png' alt='Opcion 4' width='80%'> <img src='img/opc5.png' alt='Opcion 5' width='80%'> <img src='img/opc6.png' alt='Opcion 6' width='80%'></body></html>";
+		var body ="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data); switch (e.data) {case 'opc1': window.location = 'https://speech-"+DOMINIO+"/imagen'; break; default: }};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body margin='0px'>		<img src='img/opc1.png' alt='Opcion 1' height='14%' width='80%'> <img src='img/opc2.png' alt='Opcion 2' height='14%' width='80%'> <img src='img/opc3.png' alt='Opcion 3' height='14%' width='80%'>	<img src='img/opc4.png' alt='Opcion 4' height='14%' width='80%'> <img src='img/opc5.png' alt='Opcion 5' height='14%' width='80%'> <img src='img/opc6.png' alt='Opcion 6' height='14%' width='80%'></body></html>";
 		res.send(body);
 		break;
     default: res.sendFile( __dirname + req.params[0]); 
