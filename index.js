@@ -37,7 +37,7 @@ app.get(/^(.+)$/, function(req, res){
 	    enviarMensaje("opc1");
             break;
 	case '/menu':
-		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data); switch (e.data) {case 'opc1': window.location = 'speech"+DOMINIO+"/imagen'; break; default: }};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='img/opc1.png' alt='Opcion 1' width='80%'>	</body></html>";
+		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data); switch (e.data) {case 'opc1': window.location = 'speech-"+DOMINIO+"/imagen'; break; default: }};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body>		<img src='img/opc1.png' alt='Opcion 1' width='80%'>	</body></html>";
 		res.send(body);
 		break;
     default: res.sendFile( __dirname + req.params[0]); 
