@@ -9,12 +9,6 @@ var serverConfig = {
     key: fs.readFileSync('./server.key'),
     cert: fs.readFileSync('./server.crt'),
 };
-//JADE
-
-var jade = require('jade');
-var html = jade.renderFile('filename.jade', merge(options, locals));
-
-
 
 var app = express();
 var HTTPS_PORT = 8080;
@@ -22,6 +16,12 @@ var HTTPS_PORT = 8080;
 var httpsServer = https.createServer(serverConfig, app).listen(HTTPS_PORT);
 
 var wss = new WebSocketServer({server: httpsServer});
+
+//JADE
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade');
+
+
 
 wss.on('connection', function(wss) {
 	wss.send('conectado');
@@ -43,7 +43,7 @@ app.get(/^(.+)$/, function(req, res){
 	    enviarMensaje("opc1");
             break;
 	case '/jade':
-		res.send(html);
+		res.render('index',{title: 'Home'});
 		break;
 	case '/menu':
 		var body="<html>	<head>		<script type='text/javascript'>			var connection = new WebSocket('wss://"+HOSTIP+"/' );			connection.onmessage = function (e) {               console.log('Server: ' + e.data); switch (e.data) {case 'opc1': window.location = 'https://speech-"+DOMINIO+"/imagen'; break; default: }};			function enviarMensaje(mensaje){				connection.send(mensaje);				}					</script>	</head>	<body style='margin:2px'>		<img src='img/opc1.png' alt='Opcion 1' height='14%' width='80%' style='border:0px;margin:0px;clear:both'> <img src='img/opc2.png' alt='Opcion 2' height='14%' width='80%' style='border:0px;margin:0px;clear:both'> <img src='img/opc3.png' alt='Opcion 3' height='14%' width='80%' style='border:0px;margin:0px;clear:both'>	<img src='img/opc4.png' alt='Opcion 4' height='14%' width='80%' style='border:0px;margin:0px;clear:both'> <img src='img/opc5.png' alt='Opcion 5' height='14%' width='80%' style='border:0px;margin:0px;clear:both'> <img src='img/opc6.png' alt='Opcion 6' height='14%' width='80%' style='border:0px;margin:0px;clear:both'></body></html>";
